@@ -8,6 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.WindowsAzure.Storage;
 using Microsoft.WindowsAzure.Storage.Blob;
 
+using SendGrid;
+using SendGrid.Helpers.Mail;
+
 
 namespace DokumenWebApps.Controllers
 {
@@ -27,6 +30,25 @@ namespace DokumenWebApps.Controllers
 
             blobClient = storageAccount.CreateCloudBlobClient();
             container = blobClient.GetContainerReference("dokumen");
+        }
+
+        public async Task KirimNotifikasi(string namafile)
+        {
+            var apiKey = "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"; //EmailHelpers.SendridAPI;
+            var client = new SendGridClient(apiKey);
+
+            var from = new EmailAddress("admin@yakkum.or.id", "Admin Yakkum");
+            List<EmailAddress> tos = new List<EmailAddress>() {
+                new EmailAddress{ Email="erick.kurniawan@gmail.com"},
+                new EmailAddress{Email="rufuswtn@gmail.com"},
+                new EmailAddress{Email="hiskia.ponco@gmail.com"}
+            };
+
+
+            var subject = "Notifikasi Dokumen Sudah Terupload";
+            var htmlContent = $"<p>File dengan nama {namafile} berhasil diupload </p>";
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, "", htmlContent, false);
+            var response = await client.SendEmailAsync(msg);
         }
 
 
@@ -52,6 +74,7 @@ namespace DokumenWebApps.Controllers
                     await blockBlob.UploadFromStreamAsync(formFile.OpenReadStream());
                 }
             }
+            await KirimNotifikasi(namaBaru);
             return Content("File " + namaBaru + " berhasil diupload !");
         }
 
