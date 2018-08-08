@@ -17,7 +17,7 @@ namespace DokumenWebApps.Controllers
         private CloudBlobContainer container;
         //private UploadFileToBlob objUpload;
 
-        //upload to blob
+        //upload to blob azure
         public UploadDokumenController()
         {
             storageAccount = new CloudStorageAccount(
