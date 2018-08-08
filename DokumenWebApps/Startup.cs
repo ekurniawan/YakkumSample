@@ -13,6 +13,7 @@ using DokumenWebApps.Data;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DokumenWebApps.DAL;
+using Microsoft.AspNetCore.Http.Features;
 
 namespace DokumenWebApps
 {
@@ -45,6 +46,7 @@ namespace DokumenWebApps
 
             services.AddScoped<IKlasifikasi, KlasifikasiDAL>();
             services.AddScoped<IDokumen, DokumenDAL>();
+            services.Configure<FormOptions>(x => x.MultipartBodyLengthLimit = 1_074_790_400);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

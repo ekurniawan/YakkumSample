@@ -36,6 +36,7 @@ namespace DokumenWebApps.Controllers
         }
 
         [HttpPost]
+        [DisableRequestSizeLimit]
         public async Task<IActionResult> UploadFile(List<IFormFile> files)
         {
             long size = files.Sum(f => f.Length);
