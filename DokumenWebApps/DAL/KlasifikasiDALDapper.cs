@@ -12,11 +12,10 @@ namespace DokumenWebApps.DAL
 {
     public class KlasifikasiDALDapper : IKlasifikasi
     {
-        private IConfiguration _config;
-
+        private string connStr;
         public KlasifikasiDALDapper(IConfiguration config)
         {
-            _config = config;
+            connStr = config.GetConnectionString("DefaultConnection");
         }
 
         public void Create(Klasifikasi obj)
