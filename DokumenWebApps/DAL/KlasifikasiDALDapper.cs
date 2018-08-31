@@ -37,7 +37,19 @@ namespace DokumenWebApps.DAL
 
         public void Delete(string id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string strSql = @"delete from Klasifikasi where KodeKlasifikasi=@KodeKlasifikasi";
+                try
+                {
+                    var param = new { KodeKlasifikasi = id };
+                    conn.Execute(strSql,param);
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new Exception(sqlEx.Message);
+                }
+            }
         }
 
         public IEnumerable<Klasifikasi> GetAll()

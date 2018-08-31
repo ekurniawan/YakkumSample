@@ -114,7 +114,7 @@ namespace DokumenWebApps.Controllers
         {
             try
             {
-                _tblKlasifikasi.UbahStatusAktif(id);
+                _tblKlasifikasi.Delete(id);
                 return RedirectToAction(nameof(Index));
             }
             catch (Exception ex)
