@@ -106,6 +106,7 @@ namespace DokumenWebApps.Controllers
             return View(model);
         }
 
+        //
         // POST: Klasifikasi/Delete/5
         [HttpPost]
         [ActionName("Delete")]
