@@ -38,6 +38,11 @@ namespace DokumenWebApps.DAL
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
+//                SELECT dbo.Dokumen.DokumenID, dbo.Dokumen.KodeKlasifikasi, dbo.Dokumen.NamaDokumen, dbo.Dokumen.TanggalDibuat, dbo.Dokumen.TanggalDiterima, dbo.Dokumen.Sumber, dbo.Dokumen.Keterangan, dbo.Klasifikasi.Induk, 
+//                         dbo.Klasifikasi.[Level], dbo.Klasifikasi.NamaKlasifikasi, dbo.Klasifikasi.RetensiAktif, dbo.Klasifikasi.RetensiInaktif, dbo.Klasifikasi.StatusAktif, dbo.Klasifikasi.Uraian
+//FROM            dbo.Dokumen INNER JOIN
+//                         dbo.Klasifikasi ON dbo.Dokumen.KodeKlasifikasi = dbo.Klasifikasi.KodeKlasifikasi
+
                 string strSql = @"select * from DokumenKlasifikasiView order by DokumenID asc";
                 var results = conn.Query<DokumenKlasifikasiView>(strSql);
                 return results;
