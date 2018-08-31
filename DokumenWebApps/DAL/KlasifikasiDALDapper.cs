@@ -20,7 +20,19 @@ namespace DokumenWebApps.DAL
 
         public void Create(Klasifikasi obj)
         {
-            throw new NotImplementedException();
+            using(SqlConnection conn = new SqlConnection(connStr))
+            {
+                string strSql = @"insert into Klasifikasi(KodeKlasifikasi,Induk,Level,NamaKlasifikasi,RetensiAktif,RetensiInaktif,StatusAktif,Uraian) 
+                values(@KodeKlasifikasi,@Induk,@Level,@NamaKlasifikasi,@RetensiAktif,@RetensiInaktif,@StatusAktif,@Uraian)";
+                try
+                {
+                    conn.Execute(strSql,obj);
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new Exception($"Kesalahan: {sqlEx.Message}");
+                }
+            }
         }
 
         public void Delete(string id)
@@ -59,7 +71,13 @@ namespace DokumenWebApps.DAL
 
         public Klasifikasi GetById(string id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string strSql = @"select * from Klasifikasi where KodeKlasifikasi=@KodeKlasifikasi";
+                var param = new { KodeKlasifikasi = id };
+                var result = conn.QuerySingle<Klasifikasi>(strSql,param);
+                return result;
+            }
         }
 
         public void UbahStatusAktif(string id)
@@ -69,7 +87,10 @@ namespace DokumenWebApps.DAL
 
         public void Update(Klasifikasi obj)
         {
-            throw new NotImplementedException();
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                
+            }
         }
     }
 }
