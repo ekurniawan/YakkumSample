@@ -30,7 +30,16 @@ namespace DokumenWebApps.DAL
 
         public IEnumerable<Klasifikasi> GetAll()
         {
-            throw new NotImplementedException();
+            IEnumerable<Klasifikasi> listKlasifikasi;
+            using(SqlConnection conn = new SqlConnection(connStr))
+            {
+                //string strSql = @"select * from Klasifikasi order by NamaKlasifikasi";
+                //listKlasifikasi = conn.Query<Klasifikasi>(strSql);
+
+                //memanggil store procedure
+                listKlasifikasi = conn.Query<Klasifikasi>("sp_GetAllKlasifikasi", commandType: System.Data.CommandType.StoredProcedure);
+                return listKlasifikasi;
+            }
         }
 
         public IEnumerable<Klasifikasi> GetAllAktifStatus()

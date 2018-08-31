@@ -25,7 +25,7 @@ namespace DokumenWebApps.Controllers
             else
                 ViewBag.Keterangan = string.Empty;
 
-            var models = _tblKlasifikasi.GetAllAktifStatus();
+            var models = _tblKlasifikasi.GetAll();
             return View(models);
         }
 

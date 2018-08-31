@@ -44,7 +44,7 @@ namespace DokumenWebApps
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
-            services.AddScoped<IKlasifikasi, KlasifikasiDAL>();
+            services.AddScoped<IKlasifikasi, KlasifikasiDALDapper>();
             services.AddScoped<IDokumen, DokumenDAL>();
             //services.Configure<FormOptions>(x => x.MultipartBodyLengthLimit = 1_074_790_400);
         }
