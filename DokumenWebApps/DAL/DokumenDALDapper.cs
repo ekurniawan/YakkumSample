@@ -34,6 +34,16 @@ namespace DokumenWebApps.DAL
             throw new NotImplementedException();
         }
 
+        public IEnumerable<DokumenKlasifikasiView> GetAllWithKlasifikasi()
+        {
+            using (SqlConnection conn = new SqlConnection(connStr))
+            {
+                string strSql = @"select * from DokumenKlasifikasiView order by DokumenID asc";
+                var results = conn.Query<DokumenKlasifikasiView>(strSql);
+                return results;
+            }
+        }
+
         public Dokumen GetById(string id)
         {
             throw new NotImplementedException();

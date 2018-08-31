@@ -9,5 +9,6 @@ namespace DokumenWebApps.DAL
     public interface IDokumen : ICrud<Dokumen>
     {
         IEnumerable<Dokumen> Search(string search, string pilih, DateTime tglbuatawal, DateTime tglbuatakhir);
+        IEnumerable<DokumenKlasifikasiView> GetAllWithKlasifikasi();
     }
 }

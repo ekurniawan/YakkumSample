@@ -90,5 +90,10 @@ namespace DokumenWebApps.DAL
 
             return results;
         }
+
+        public IEnumerable<DokumenKlasifikasiView> GetAllWithKlasifikasi()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

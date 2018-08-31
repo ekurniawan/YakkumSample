@@ -21,7 +21,8 @@ namespace DokumenWebApps.Controllers
         // GET: Dokumen
         public ActionResult Index()
         {
-            var results = _dokumen.GetAll();
+            //var results = _dokumen.GetAll();
+            var results = _dokumen.GetAllWithKlasifikasi();
             return View(results);
         }
 

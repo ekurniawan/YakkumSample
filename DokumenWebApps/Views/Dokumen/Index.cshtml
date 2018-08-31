@@ -1,4 +1,4 @@
-﻿@model IEnumerable<DokumenWebApps.Models.Dokumen>
+﻿@model IEnumerable<DokumenWebApps.Models.DokumenKlasifikasiView>
 
 @{
     ViewData["Title"] = "Index";
@@ -47,7 +47,7 @@
                         @Html.DisplayNameFor(model => model.DokumenID)
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Klasifikasi.NamaKlasifikasi)
+                        Nama Klasifikasi
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.NamaDokumen)
@@ -75,7 +75,7 @@
                             @Html.DisplayFor(modelItem => item.DokumenID)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.Klasifikasi.NamaKlasifikasi)
+                            @Html.DisplayFor(modelItem => item.NamaKlasifikasi)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.NamaDokumen)
