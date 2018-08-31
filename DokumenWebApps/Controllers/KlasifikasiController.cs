@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DokumenWebApps.DAL;
 using DokumenWebApps.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -37,6 +38,7 @@ namespace DokumenWebApps.Controllers
         }
 
         // GET: Klasifikasi/Create
+        [Authorize()]
         public ActionResult Create()
         {
             return View();
