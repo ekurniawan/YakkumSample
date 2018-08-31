@@ -89,7 +89,17 @@ namespace DokumenWebApps.DAL
         {
             using (SqlConnection conn = new SqlConnection(connStr))
             {
-                
+                string strSql = @"update Klasifikasi set Induk=@Induk,Level=@Level,
+                NamaKlasifikasi=@NamaKlasifikasi,RetensiAktif=@RetensiAktif,RetensiInaktif=@RetensiInaktif,StatusAktif=@StatusAktif,Uraian=@Uraian 
+                where KodeKlasifikasi=@KodeKlasifikasi";
+                try
+                {
+                    conn.Execute(strSql, obj);
+                }
+                catch (SqlException sqlEx)
+                {
+                    throw new Exception("Error: "+sqlEx.Message);
+                }
             }
         }
     }
