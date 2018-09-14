@@ -29,6 +29,18 @@ namespace DokumenWebApps.Controllers
             return View();
         }
 
+        public IActionResult GetUser()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return Content($"Nama Pengguna: {User.Identity.Name}");
+            }
+            else
+            {
+                return Content($"Anda belum Login");
+            }
+        }
+
         public IActionResult Privacy()
         {
             return View();
