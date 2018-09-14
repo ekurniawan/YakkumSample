@@ -40,11 +40,13 @@ namespace DokumenWebApps.Areas.Identity.Pages.Account
         {
             if (ModelState.IsValid)
             {
+                //!(await _userManager.IsEmailConfirmedAsync(user))
                 var user = await _userManager.FindByEmailAsync(Input.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+                if (user == null)
                 {
                     // Don't reveal that the user does not exist or is not confirmed
                     return RedirectToPage("./ForgotPasswordConfirmation");
+                    //return Content("Tidak Ditemukan ");
                 }
 
                 // For more information on how to enable account confirmation and password reset please 
@@ -62,7 +64,7 @@ namespace DokumenWebApps.Areas.Identity.Pages.Account
                 //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
                 await KirimNotifikasi(HtmlEncoder.Default.Encode(callbackUrl), Input.Email);
 
-
+                //return Content(Input.Email);
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
@@ -71,7 +73,7 @@ namespace DokumenWebApps.Areas.Identity.Pages.Account
 
         public async Task KirimNotifikasi(string callbackUrl,string email)
         {
-            var apiKey = ""; //EmailHelpers.SendridAPI;
+            var apiKey = "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"; //EmailHelpers.SendridAPI;
             var client = new SendGridClient(apiKey);
 
             var from = new EmailAddress("admin@yakkum.or.id", "Admin Yakkum");

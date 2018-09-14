@@ -34,7 +34,7 @@ namespace DokumenWebApps.Controllers
 
         public async Task KirimNotifikasi(string namafile)
         {
-            var apiKey = ""; //EmailHelpers.SendridAPI;
+            var apiKey = "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"; //EmailHelpers.SendridAPI;
             var client = new SendGridClient(apiKey);
 
             var from = new EmailAddress("admin@yakkum.or.id", "Admin Yakkum");
