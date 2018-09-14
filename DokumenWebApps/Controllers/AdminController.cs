@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DokumenWebApps.DAL;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 
@@ -10,23 +11,26 @@ namespace DokumenWebApps.Controllers
     public class AdminController : Controller
     {
         private UserManager<IdentityUser> _userManager;
-        public AdminController(UserManager<IdentityUser> userManager)
+        private RoleManager<IdentityRole> _roleManager;
+        private PenggunaDAL penggunaDAL;
+        public AdminController(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
+            _roleManager = roleManager;
+            penggunaDAL = new PenggunaDAL(_userManager,_roleManager);
         }
 
-        public async Task<IActionResult> Index(string userid, string role)
+        public async Task<IActionResult> Index()
         {
-            var pengguna = await _userManager.FindByNameAsync(userid);
             try
             {
-                await _userManager.AddToRoleAsync(pengguna, role);
+                await penggunaDAL.CreateRole("admin");
+                return Content("Berhasil menambahkan role");
             }
-            catch (Exception ex)
+            catch(Exception ex)
             {
-                throw new Exception("Error : " + ex.Message);
+                return Content($"Error:{ex.Message}");
             }
-            return View();
         }
     }
 }

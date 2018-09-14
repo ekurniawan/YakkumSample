@@ -12,7 +12,8 @@ namespace DokumenWebApps.DAL
         private UserManager<IdentityUser> _userManager;
         private RoleManager<IdentityRole> _roleManager;
 
-        public PenggunaDAL(UserManager<IdentityUser> userManager, RoleManager<IdentityRole> roleManager)
+        public PenggunaDAL(UserManager<IdentityUser> userManager, 
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -30,9 +31,20 @@ namespace DokumenWebApps.DAL
             return results;
         }
 
-        public async Task AddRoleToUser(string userid, string role)
+        public async Task CreateRole(string roleName)
         {
-            var user = await _userManager.FindByNameAsync(userid);
+            IdentityResult roleResult;
+            var roleExist = await _roleManager.RoleExistsAsync(roleName);
+            if (!roleExist)
+            {
+                roleResult = await _roleManager.CreateAsync(new IdentityRole(roleName));
+            }
+        }
+
+        public async Task AddRoleToUser(string username, string role)
+        {
+            
+            var user = await _userManager.FindByNameAsync(username);
             try
             {
                 await _userManager.AddToRoleAsync(user, role);
