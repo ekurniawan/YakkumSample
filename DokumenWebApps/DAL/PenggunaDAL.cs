@@ -41,7 +41,7 @@ namespace DokumenWebApps.DAL
             }
         }
 
-        public async Task AddRoleToUser(string username, string role)
+        public async Task AddUserToRole(string username, string role)
         {
             
             var user = await _userManager.FindByNameAsync(username);

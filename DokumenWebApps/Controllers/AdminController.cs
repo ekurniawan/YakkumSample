@@ -20,16 +20,35 @@ namespace DokumenWebApps.Controllers
             penggunaDAL = new PenggunaDAL(_userManager,_roleManager);
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> CreateRole(string role)
         {
             try
             {
-                await penggunaDAL.CreateRole("admin");
+                await penggunaDAL.CreateRole(role);
                 return Content("Berhasil menambahkan role");
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return Content($"Error:{ex.Message}");
+            }
+        }
+
+        //Admin/RegisterUserToRole?username=erick.kurniawan@gmail.com&role=admin
+        public async Task<IActionResult> RegisterUserToRole(string username,string role)
+        {
+            try
+            {
+                await penggunaDAL.AddUserToRole(username, role);
+                return Content($"Berhasil mendaftakan user {username} ke role {role}");
+            }
+            catch (Exception ex)
+            {
+                return Content($"Error: {ex.Message}");
             }
         }
     }
