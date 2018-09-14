@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using DokumenWebApps.DAL;
 using DokumenWebApps.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -18,9 +19,12 @@ namespace DokumenWebApps.Controllers
             _dokumen = dokumen;
             _klasifikasi = klasifikasi;
         }
+
         // GET: Dokumen
+        [Authorize]
         public ActionResult Index()
         {
+            
             //var results = _dokumen.GetAll();
             var results = _dokumen.GetAllWithKlasifikasi();
             return View(results);

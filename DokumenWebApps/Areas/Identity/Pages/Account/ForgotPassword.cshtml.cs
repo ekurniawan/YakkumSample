@@ -9,6 +9,9 @@ using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 
+using SendGrid;
+using SendGrid.Helpers.Mail;
+
 namespace DokumenWebApps.Areas.Identity.Pages.Account
 {
     [AllowAnonymous]
@@ -53,15 +56,34 @@ namespace DokumenWebApps.Areas.Identity.Pages.Account
                     values: new { code },
                     protocol: Request.Scheme);
 
-                await _emailSender.SendEmailAsync(
-                    Input.Email,
-                    "Reset Password",
-                    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                //await _emailSender.SendEmailAsync(
+                //    Input.Email,
+                //    "Reset Password",
+                //    $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+                await KirimNotifikasi(callbackUrl, Input.Email);
+
 
                 return RedirectToPage("./ForgotPasswordConfirmation");
             }
 
             return Page();
+        }
+
+        public async Task KirimNotifikasi(string callbackUrl,string email)
+        {
+            var apiKey = "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"; //EmailHelpers.SendridAPI;
+            var client = new SendGridClient(apiKey);
+
+            var from = new EmailAddress("admin@yakkum.or.id", "Admin Yakkum");
+            List<EmailAddress> tos = new List<EmailAddress>() {
+                new EmailAddress{ Email=email},
+            };
+
+
+            var subject = "Reset Password";
+            var htmlContent = $"Please reset your password by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>";
+            var msg = MailHelper.CreateSingleEmailToMultipleRecipients(from, tos, subject, "", htmlContent, false);
+            var response = await client.SendEmailAsync(msg);
         }
     }
 }
