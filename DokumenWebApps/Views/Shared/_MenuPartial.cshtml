@@ -3,8 +3,6 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<p>User : </p>@User.IsInRole("admin")
-
 @if (User.IsInRole("admin"))
 {
     <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Example Pages">
