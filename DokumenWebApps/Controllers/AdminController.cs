@@ -22,7 +22,7 @@ namespace DokumenWebApps.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            return Content($"User is in role admin {User.IsInRole("admin")}");
         }
 
         public async Task<IActionResult> CreateRole(string role)

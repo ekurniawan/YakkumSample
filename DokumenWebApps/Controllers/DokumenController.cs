@@ -21,7 +21,7 @@ namespace DokumenWebApps.Controllers
         }
 
         // GET: Dokumen
-        [Authorize]
+        [Authorize(Roles ="admin")]
         public ActionResult Index()
         {
             
