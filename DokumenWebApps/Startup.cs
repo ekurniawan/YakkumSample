@@ -14,6 +14,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using DokumenWebApps.DAL;
 using Microsoft.AspNetCore.Http.Features;
+using DokumenWebApps.Services;
+using DokumenWebApps.Helpers;
 
 namespace DokumenWebApps
 {
@@ -53,6 +55,12 @@ namespace DokumenWebApps
 
             services.AddScoped<IKlasifikasi, KlasifikasiDALDapper>();
             services.AddScoped<IDokumen, DokumenDALDapper>();
+
+            var appSettingsSection = Configuration.GetSection("AppSettings");
+            services.Configure<AppSettings>(appSettingsSection);
+
+            //menambahkan untuk web api token
+            services.AddScoped<IUserService, UserService>();
             //services.Configure<FormOptions>(x => x.MultipartBodyLengthLimit = 1_074_790_400);
         }
 

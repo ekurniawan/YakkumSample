@@ -21,6 +21,7 @@ namespace DokumenWebApps.DAL
 
         public async Task<List<string>> GetAllUser()
         {
+            
             var results = await _userManager.Users.Select(r => r.UserName).AsNoTracking().ToListAsync();
             return results;
         }

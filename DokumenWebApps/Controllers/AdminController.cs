@@ -22,6 +22,7 @@ namespace DokumenWebApps.Controllers
 
         public IActionResult Index()
         {
+            
             return Content($"User is in role admin {User.IsInRole("admin")}");
         }
 
